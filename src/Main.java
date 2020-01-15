@@ -20,14 +20,12 @@ public class Main {
         {
             System.out.println(resultSet.getString("first_name"));
         }
+        MyFrame f = new MyFrame();
+        RoomFrame r;
+        r = new RoomFrame();
+        Employee e = new Employee();
 
-        Connection.getInstance().close();
 
-        JFrame jFrame = new JFrame();
-        jFrame.setTitle("test");
-        jFrame.setBounds(300, 90, 900, 600);
-        jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        jFrame.setResizable(false);
-        jFrame.setVisible(true);
+
     }
 }
