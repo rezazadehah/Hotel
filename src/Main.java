@@ -13,18 +13,17 @@ public class Main {
 
        // String s = "INSERT INTO passenger (`first_name`,`last_name`, national_code) VALUES ('boogh','Male',222222)";
 
-        String s = "SELECT * FROM passenger";
+        String s = "SELECT * FROM room_type";
         ResultSet resultSet = Connection.getInstance().createStatement().executeQuery(s);
 
         while (resultSet.next())
         {
-            System.out.println(resultSet.getString("first_name"));
+            System.out.println(resultSet.getString("type"));
         }
         MyFrame f = new MyFrame();
-        RoomFrame r;
-        r = new RoomFrame();
         Employee e = new Employee();
-
+        RoomTypeFrame t = new RoomTypeFrame();
+        RoomFrame r = new RoomFrame();
 
 
     }
