@@ -104,7 +104,9 @@ public class RoomTypeFrame extends JFrame implements ActionListener {
             try {
 
 
-                 String s = "INSERT INTO room_type (`type`,`feature`, `cost`) VALUES ('"+ttype.getText()+"','"+tfeature.getText()+"','"+tcost.getText()+"')";
+                 String s ="";
+
+
                 Connection.getInstance().createStatement().execute(s);
                 setVisible(false); //you can't see me!
                 dispose();

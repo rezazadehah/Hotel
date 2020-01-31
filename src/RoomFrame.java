@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RoomFrame extends JFrame implements ActionListener {
@@ -24,7 +25,7 @@ public class RoomFrame extends JFrame implements ActionListener {
     private JButton sub;
     private JButton reset;
 
-    private String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
+    private String[] petStrings = { };
 
 
     public RoomFrame(){
@@ -32,6 +33,8 @@ public class RoomFrame extends JFrame implements ActionListener {
         setTitle("اتاق");
         setBounds(300,90,600,600);
         setResizable(false);
+
+
 
         c = getContentPane();
         c.setLayout(null);
@@ -64,9 +67,23 @@ public class RoomFrame extends JFrame implements ActionListener {
         troomtype.setFont(new Font("Arial", Font.PLAIN, 15));
         troomtype.setSize(190, 25);
         troomtype.setLocation(200, 120);
-        troomtype.setSelectedIndex(4);
+        troomtype.setLocation(200, 120);
         troomtype.addActionListener(this);
         c.add(troomtype);
+
+        String s = "select * from room_type";
+        try {
+            ResultSet resultSet = Connection.getInstance().createStatement().executeQuery(s);
+
+            while (resultSet.next())
+            {
+                troomtype.addItem(resultSet.getString(2));
+                System.out.println();
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
         roomnumber = new JLabel(": شماره اتاق");
         roomnumber.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -113,6 +130,7 @@ public class RoomFrame extends JFrame implements ActionListener {
         reset.setLocation(300, 470);
         reset.addActionListener(this);
         reset.setActionCommand("yy");
+
         c.add(reset);
 
         setVisible(true);
@@ -132,6 +150,21 @@ public class RoomFrame extends JFrame implements ActionListener {
                 setVisible(false);
                 dispose();
             } catch (SQLException ex){
+                ex.printStackTrace();
+            }
+
+        }else if(e.getActionCommand().equals("yy"))
+        {
+            String s = "select * from room_type";
+            try {
+                ResultSet resultSet = Connection.getInstance().createStatement().executeQuery(s);
+
+                while (resultSet.next())
+                {
+                    System.out.println(resultSet.getObject(0));
+                }
+
+            } catch (SQLException ex) {
                 ex.printStackTrace();
             }
 
